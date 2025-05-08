@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Loomians</title>
+</head>
+<body>
+    <h1>Available Loomians</h1>
+    <ul>
+        {% if loomians|length == 0 %}
+            <li>No loomians available</li>
+        {% else %}
+            <p>There are {{ loomians|length }} available loomians:</p>
+            {% for loomian in loomians %}
+                <hr>
+                <li>
+                    Id: {{ loomian.id }} | Name: {{ loomian.name }} | Types: {{ loomian.main_type }}/
+                    {{ loomian.secondary_type }} | Ability: {{ loomian.ability }} | Melee Attack: 
+                    {{ loomian.melee_attack }} | Melee Defense: {{ loomian.melee_defense }} 
+                    | Ranged Attack: {{ loomian.ranged_attack }} | Ranged Defense: {{ loomian.ranged_defense }}
+                    | Speed: {{ loomian.speed }} | <p><a href="{{ url_for('manage_attacks', loomian_id = loomian.id) }}" class="btn btn-primary">Manage Attacks</a></p>
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <p>For more information about Loomian Legacy, visit 
+        <a href="https://loomian-legacy.fandom.com/wiki/Loomian_Legacy_Wiki" target="_blank">loomian-legacy.fandom.com</a>
+    </p>
+    <p><a href="{{ url_for('show_parties') }}">Manage loomian parties</a></p>
+    <p><a href="{{ url_for('show_attacks') }}">Show avaiable attacks</a></p>
+    <p><a href="{{ url_for('index') }}">Return to main page</a></p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party: {{ party.name}}</title>
+</head>
+<body>
+    <h1>Party: {{ party.name}}</h1>
+    
+    <h2>Current loomians</h2>
+    <ul>
+        {% for l in loomians %}
+            <li>
+                Id: {{ l.id }} | Name: {{ l.name }} | Types: ({{ l.main_type }}{{ " / " + l.secondary_type if l.secondary_type else ""}}) 
+                | Ability: {{ l.ability }} | Melee Attack: {{ l.melee_attack }} 
+                | Melee Defense: {{ l.melee_defense }} | Ranged Attack: {{ l.ranged_attack }} 
+                | Ranged Defense: {{ l.ranged_defense }} | Speed: {{ l.speed }} 
+                | <form method="post" action="{{ url_for('remove_loomian_from_party') }}" style="display:inline;">
+                    <input type="hidden" name="party_id" value="{{ party.id }}">
+                    <input type="hidden" name="loomian_id" value="{{ l.id }}">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add loomian to party</h2>
+    <form action="{{ url_for('add_loomian_to_party', party_id=party.id) }}" method="post">
+        <select name="loomian_id" required>
+            {% for loomian in all_loomians %}
+                <option value="{{ loomian.id }}">{{ loomian.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Add loomian to party</button>
+    </form>
+
+    <p><a href="{{ url_for('show_parties')}}">Back to parties</a></p>
+</body>
+</html>

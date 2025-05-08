@@ -7,16 +7,19 @@
 </head>
 <body>
     <h1>Welcome to loomian legacy management aplication</h1>
-    <p>For now this app only displays this title screen.</p>
-    <p>More featurues are comming soon. Here is a list of features that will inclue</p>
+    <p>What would you like to do?</p>
     <ul>
-        <li>Manage loomians</li>
-        <li>Manage loomian parties</li>
-        <li>Manage loomian attacks</li>
+        <li><a href="/loomians">Show available loomians</a></li>
+        <li><a href="{{ url_for('show_parties') }}">Manage loomian parties</a></li>
+        <li><a href="{{ url_for('show_attacks') }}">Show available attacks</a></li>
     </ul>
-
-    <p>For now you can only see this title screen.</p>
+    <p>Special features that will be available in the future</p>
+    <ul>
+        <li>Add attacks to database from the Show available attacks page</li>
+        <li>Add loomians to database from the Show available loomians page</li>
+        <li>Removing attacks from the database</li>
+        <li>Removing loomians from the database</li>
+    </ul>
     <p>You can find some info about loomian legacy in <a href="https://loomian-legacy.fandom.com/wiki/Loomian_Legacy_Wiki">loomian-legacy.fandom.com</a></p>
-    <p>Thank you for stopping by!</p>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Parties</title>
+</head>
+<body>
+    <h1>Manage Parties</h1>
+    
+    <form action="{{ url_for('create_party') }}" method="post">
+        <input type="text" name="name" placeholder="Party Name" required>
+        <button type="submit">Create Party</button>
+    </form>
+
+    <h2>Available Parties</h2>
+    <ul>
+        {% if parties|length == 0 %}
+            <li>No parties available</li>
+        {% else %}
+            <p>There are {{ parties|length }} available parties:</p>
+            {% for party in parties %}
+                <li>
+                    Id: {{ party.id }} | Name: {{ party.name }} | 
+                    <a href="{{ url_for('view_party', party_id=party.id) }}">
+                    View / Add loomians</a> | <form method="post" action="{{ url_for('delete_party') }}" 
+                    onsubmit="return confirm('Are you sure you want to delete this party?')" style="display:inline;">
+                        <input type="hidden" name="party_id" value="{{ party.id }}">
+                        <button type="submit">Delete party</button>
+                    </form>
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>            
+    <p>For more information about loomian legacy, visit 
+        <a href="https://loomian-legacy.fandom.com/wiki/Loomian_Legacy_Wiki" target="_blank">loomian-legacy.fandom.com</a>
+    </p>
+    <p><a href="/loomians">Show available loomians</a></p>
+    <p><a href="{{ url_for('show_attacks') }}">Manage loomian attacks</a></p>
+    <p><a href="{{ url_for('index') }}">Return back to main page</a></p>
+    </body>
+</html>

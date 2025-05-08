@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Attacks</title>
+</head>
+<body>
+    <h1>Available Attacks</h1>
+    {% if attacks|length == 0 %}
+        <p>No attacks available</p>
+    {% else %}
+        <p>There are {{ attacks|length }} available attacks:</p>
+        <table border="1" cellpadding="5" cellspacing="0">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Power</th>
+                <th>Accuracy</th>
+            </tr>
+            {% for attack in attacks %}
+            <tr>
+                <td>{{ attack.id }}</td>
+                <td>{{ attack.name }}</td>
+                <td>{{ attack.type }}</td>
+                <td>{{ attack.power }}</td>
+                <td>{{ attack.accuracy }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <p><a href="{{ url_for('index') }}">Return to main page</a></p>
+    <p><a href="{{ url_for('loomians') }}">Show available loomians</a></p>
+    <p><a href="{{ url_for('show_parties') }}">manage loomian parties</a></p>
+</body>
+</html>
