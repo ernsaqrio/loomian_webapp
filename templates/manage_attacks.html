@@ -4,6 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Attacks for {{ loomian.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        form {
+            display: inline;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+        }
+        option {
+            padding: 10px;
+            font-size: 16px;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Manage Attacks for {{ loomian.name }}</h1>
@@ -38,9 +90,9 @@
         <input type="submit" value="Add Attack">
     </form>
 
-    <p><a href="{{ url_for('loomians') }}">Show available loomians</a></p>
+    <p><a href="{{ url_for('loomians') }}">Manage available loomians in database</a></p>
     <p><a href="{{ url_for('show_parties') }}">Manage loomian parties</a></p>
-    <p><a href="{{ url_for('show_attacks') }}">Show available attacks</a></p>
+    <p><a href="{{ url_for('show_attacks') }}">Manage available attacks in database</a></p>
     <p><a href="{{ url_for('index') }}">Return to main page</a></p>
 </body>
 </html>

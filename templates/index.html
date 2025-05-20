@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loomian legacy management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <h1>Welcome to loomian legacy management aplication</h1>
     <p>What would you like to do?</p>
     <ul>
-        <li><a href="/loomians">Show available loomians</a></li>
+        <li><a href="/loomians">Manage available loomians in database</a></li>
         <li><a href="{{ url_for('show_parties') }}">Manage loomian parties</a></li>
-        <li><a href="{{ url_for('show_attacks') }}">Show available attacks</a></li>
-    </ul>
-    <p>Special features that will be available in the future</p>
-    <ul>
-        <li>Add attacks to database from the Show available attacks page</li>
-        <li>Add loomians to database from the Show available loomians page</li>
-        <li>Removing attacks from the database</li>
-        <li>Removing loomians from the database</li>
+        <li><a href="{{ url_for('show_attacks') }}">Manage available attacks in database</a></li>
     </ul>
     <p>You can find some info about loomian legacy in <a href="https://loomian-legacy.fandom.com/wiki/Loomian_Legacy_Wiki">loomian-legacy.fandom.com</a></p>
+    <p></p>
+    <img src="{{ url_for('static', filename='images/loomian-logo.png') }}" alt="Loomian Legacy Logo" class="logo-image">
+    <img src="{{ url_for('static', filename='images/Roblox_Logo_2025.png') }}" alt="Roblox Logo" class="logo-image">
+    <img src="{{ url_for('static', filename='images/lts-logo.png') }}" alt="LLama Train Logo" class="logo-image">
 </body>
 </html>

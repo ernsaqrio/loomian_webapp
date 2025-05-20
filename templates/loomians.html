@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Loomians</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Available Loomians</h1>
     <ul>
         {% if loomians|length == 0 %}
-            <li>No loomians available</li>
+            <p>No loomians available</p>
         {% else %}
             <p>There are {{ loomians|length }} available loomians:</p>
             {% for loomian in loomians %}
@@ -20,15 +23,56 @@
                     {{ loomian.melee_attack }} | Melee Defense: {{ loomian.melee_defense }} 
                     | Ranged Attack: {{ loomian.ranged_attack }} | Ranged Defense: {{ loomian.ranged_defense }}
                     | Speed: {{ loomian.speed }} | <p><a href="{{ url_for('manage_attacks', loomian_id = loomian.id) }}" class="btn btn-primary">Manage Attacks</a></p>
+                    <form action="{{ url_for('delete_loomian') }}" method="POST" style="display:inline;">
+                        <input type="hidden" name="loomian_id" value="{{ loomian.id }}">
+                        <button type="submit" value="Delete Loomian">Delete Loomian</button>
+                    </form>
                 </li>
             {% endfor %}
         {% endif %}
     </ul>
+    <hr>
+    <h2>Add new loomian</h2>
+    
+    <form action="{{ url_for('add_loomian') }}" method="post">
+        <label for ="id">Loomipedia Number ID:</label>
+        <input type="number" id="id" name="id" required><br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="main_type">Main Type:</label>
+        <input type="text" id="main_type" name="main_type" required><br><br>
+
+        <label for="secondary_type">Secondary Type:</label>
+        <input type="text" id="secondary_type" name="secondary_type"><br><br>
+
+        <label for="ability">Ability:</label>
+        <input type="text" id="ability" name="ability"><br><br>
+
+        <label for="melee_attack">Melee Attack:</label>
+        <input type="number" id="melee_attack" name="melee_attack"><br><br>
+
+        <label for="melee_defense">Melee Defense:</label>
+        <input type="number" id="melee_defense" name="melee_defense"><br><br>
+
+        <label for="ranged_attack">Ranged Attack:</label>
+        <input type="number" id="ranged_attack" name="ranged_attack"><br><br>
+
+        <label for="ranged_defense">Ranged Defense:</label>
+        <input type="number" id="ranged_defense" name="ranged_defense"><br><br>
+
+        <label for="speed">Speed:</label>
+        <input type="number" id="speed" name="speed"><br><br>
+
+        <button type="submit">Add Loomian</button>
+    </form>
+    <hr>
     <p>For more information about Loomian Legacy, visit 
         <a href="https://loomian-legacy.fandom.com/wiki/Loomian_Legacy_Wiki" target="_blank">loomian-legacy.fandom.com</a>
     </p>
     <p><a href="{{ url_for('show_parties') }}">Manage loomian parties</a></p>
-    <p><a href="{{ url_for('show_attacks') }}">Show avaiable attacks</a></p>
+    <p><a href="{{ url_for('show_attacks') }}">Manage available attacks in database</a></p>
     <p><a href="{{ url_for('index') }}">Return to main page</a></p>
 </body>
 </html>

@@ -16,6 +16,27 @@ db_config = {
 def index():
     return render_template("index.html")
 
+@app.route("/loomians/delete", methods=["POST"])
+def delete_loomian():
+    loomian_id = request.form["loomian_id"]
+
+    # Connecting to database
+    con = mysql.connector.connect(**db_config)
+    cursor = con.cursor()
+
+    # Deleting the loomian
+    cursor.execute("DELETE FROM Loomian_attack WHERE loomian_id = %s", (loomian_id,))
+    cursor.execute("DELETE FROM Loomian_party WHERE loomian_id = %s", (loomian_id,))
+    cursor.execute("DELETE FROM Loomian WHERE id = %s", (loomian_id,))
+
+    con.commit()
+
+    # Ending the connection
+    cursor.close()
+    con.close()
+
+    return redirect(url_for("loomians"))
+
 @app.route("/loomians")
 def loomians():
     # Connecting to database
@@ -31,6 +52,33 @@ def loomians():
     con.close()
 
     return render_template("loomians.html", loomians=loomians)
+
+@app.route("/loomians/add", methods=["POST"])
+def add_loomian():
+    id = request.form["id"]
+    name = request.form["name"]
+    main_type = request.form["main_type"]
+    secondary_type = request.form["secondary_type"]
+    ability = request.form["ability"]
+    melee_attack = request.form["melee_attack"]
+    melee_defense = request.form["melee_defense"]
+    ranged_attack = request.form["ranged_attack"]
+    ranged_defense = request.form["ranged_defense"]
+    speed = request.form["speed"]
+
+    # Connecting to database
+    con = mysql.connector.connect(**db_config)
+    cursor = con.cursor()
+
+    # Adding loomian to the database
+    cursor.execute("INSERT INTO Loomian (id, name, main_type, secondary_type, ability, melee_attack, melee_defense, ranged_attack, ranged_defense, speed) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (id, name, main_type, secondary_type, ability, melee_attack, melee_defense, ranged_attack, ranged_defense, speed))
+    con.commit()
+
+    # Ending the connection
+    cursor.close()
+    con.close()
+
+    return redirect(url_for("loomians"))
 
 @app.route("/delete_party", methods=["POST"])
 def delete_party():
@@ -165,6 +213,25 @@ def remove_attack(loomian_id):
 
     return redirect(url_for("manage_attacks", loomian_id=loomian_id))
 
+@app.route("/attacks/delete", methods=["POST"])
+def delete_attack():
+    attack_id = request.form["attack_id"]
+
+    # Connecting to database
+    con = mysql.connector.connect(**db_config)
+    cursor = con.cursor()
+
+    # Deleting the attack
+    cursor.execute("DELETE FROM Loomian_attack WHERE attack_id = %s", (attack_id,))
+    cursor.execute("DELETE FROM Attack WHERE id = %s", (attack_id,))
+    con.commit()
+
+    # Ending the connection
+    cursor.close()
+    con.close()
+
+    return redirect(url_for("show_attacks"))
+
 @app.route("/attacks")
 def show_attacks():
     # Connecting to database
@@ -180,6 +247,28 @@ def show_attacks():
     con.close()
 
     return render_template("attacks.html", attacks=attacks)
+
+@app.route("/attacks/create", methods=["POST"])
+def create_attack():
+    id = request.form["id"]
+    name = request.form["name"]
+    type = request.form["type"]
+    power = request.form["power"]
+    accuracy = request.form["accuracy"]
+
+    # Connecting to database
+    con = mysql.connector.connect(**db_config)
+    cursor = con.cursor()
+
+    # Creating attack in the database
+    cursor.execute("INSERT INTO Attack (id, name, type, power, accuracy) VALUES (%s, %s, %s, %s, %s)", (id, name, type, power, accuracy))
+    con.commit()
+
+    # Ending the connection
+    cursor.close()
+    con.close()
+
+    return redirect(url_for("show_attacks"))
 
 @app.route("/loomian/<int:loomian_id>/attacks", methods=["GET","POST"])
 def manage_attacks(loomian_id):

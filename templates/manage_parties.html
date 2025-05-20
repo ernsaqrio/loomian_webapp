@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Parties</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Manage Parties</h1>
@@ -35,8 +38,9 @@
     <p>For more information about loomian legacy, visit 
         <a href="https://loomian-legacy.fandom.com/wiki/Loomian_Legacy_Wiki" target="_blank">loomian-legacy.fandom.com</a>
     </p>
-    <p><a href="/loomians">Show available loomians</a></p>
-    <p><a href="{{ url_for('show_attacks') }}">Manage loomian attacks</a></p>
+    <hr>
+    <p><a href="/loomians">Manage available loomians in database</a></p>
+    <p><a href="{{ url_for('show_attacks') }}">Manage loomian attacks in database</a></p>
     <p><a href="{{ url_for('index') }}">Return back to main page</a></p>
     </body>
 </html>
