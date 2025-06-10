@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 # Configuring a mysql connection
 db_config = {
-    'host': '10.3.129.12',
+    'host': 'esaqrio.mysql.pythonanywhere-services.com',
     'port': 3306,
-    'user': 'root',
-    'password': 'usuario',
-    'database': 'loomian_db'
+    'user': 'esaqrio',
+    'password': 'umbreon99',
+    'database': 'esaqrio$default'
 }
 
 @app.route("/")
